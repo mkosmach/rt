@@ -328,6 +328,30 @@ function escapeCssSelector(str) {
     return str.replace(/([^A-Za-z0-9_-])/g,'\\$1');
 }
 
+function AddTicketTimer() {
+    var container = jQuery('#ticket_timer');
+    var readout = container.find('.readout');
+
+    var seconds = 0;
+    setInterval(function () {
+        seconds++;
+
+        var s = seconds;
+        var h = Math.floor(s / 3600);
+        s -= h * 3600;
+        var m = Math.floor(s / 60);
+        s -= m * 60;
+
+        if (m < 10) {
+            m = "0" + m;
+        }
+        if (s < 10) {
+            s = "0" + s;
+        }
+
+        readout.text(h + ':' + m + ':' + s);
+    }, 1000);
+}
 
 jQuery(function() {
     jQuery(".user-accordion").each(function(){
@@ -342,4 +366,5 @@ jQuery(function() {
         });
     });
     ReplaceAllTextareas();
+    AddTicketTimer();
 });
