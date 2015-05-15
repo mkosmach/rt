@@ -331,22 +331,99 @@ function escapeCssSelector(str) {
 function AddTicketTimer() {
     var container = jQuery('#ticket_timer');
     var readout = container.find('.readout');
+    var start = container.find('.start');
+    var playpause = container.find('.playpause');
+    var pause = playpause.find('.pause');
+    var unpause = playpause.find('.unpause');
+    var ticket = container.find('.ticket');
+
+    var isRunning = false;
+    var isTicketPage = window.location.href.match(new RegExp('/Ticket/'));
 
     var seconds = 0;
-    setInterval(function () {
-        seconds += 10;
+    if (sessionStorage && sessionStorage.seconds) {
+        seconds = parseInt(sessionStorage.seconds);
+        isRunning = true;
+    }
 
+    var isPaused = false;
+    if (sessionStorage && sessionStorage.isPaused) {
+        isPaused = parseInt(sessionStorage.isPaused) ? true : false;
+    }
+
+    var renderReadout = function (seconds) {
         var s = seconds;
         var h = Math.floor(s / 3600);
         s -= h * 3600;
         var m = Math.floor(s / 60);
+        s -= m * 60;
 
         if (m < 10) {
             m = "0" + m;
         }
+        if (s < 10) {
+            s = "0" + s;
+        }
 
-        readout.text(h + ':' + m);
-    }, 10000);
+        readout.text(h + ':' + m + ':' + s);
+    };
+
+    var renderPlaypause = function (isPaused) {
+        if (isPaused) {
+            pause.hide();
+            unpause.show();
+        }
+        else {
+            unpause.hide();
+            pause.show();
+        }
+    };
+
+    var intervalCallback = function () {
+        if (isPaused) {
+            return;
+        }
+
+        seconds += 1;
+        sessionStorage.seconds = seconds;
+
+        renderReadout(seconds);
+    };
+
+    var startTimer = function () {
+        renderReadout(seconds);
+        renderPlaypause(isPaused);
+        start.hide();
+        readout.show();
+        playpause.show();
+        ticket.show();
+        setInterval(intervalCallback, 1000);
+    };
+
+    playpause.on('click', function () {
+        isPaused = !isPaused;
+        sessionStorage.isPaused = isPaused ? 1 : 0;
+
+        renderPlaypause(isPaused);
+    });
+
+    // if the timer is already running on load, hide the start button and
+    // show the readout
+    if (isRunning) {
+        startTimer();
+    }
+    // the timer isn't running, but we're on a ticket page, so show the
+    // start button
+    else if (isTicketPage) {
+        start.on('click', function () {
+            startTimer();
+        });
+    }
+    // otherwise, the timer is not running, and we're not on a ticket page,
+    // so don't offer to start the timer
+    else {
+        container.hide();
+    }
 }
 
 jQuery(function() {

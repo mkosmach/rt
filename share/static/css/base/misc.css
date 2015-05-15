@@ -82,7 +82,7 @@ textarea.messagebox, #cke_Content, #cke_UpdateContent {
 
 #ticket_timer {
     position: fixed;
-    bottom: 25px;
+    bottom: 50px;
     right: 0px;
     background-color: rgba(255, 255, 255, 0.85);
     z-index: 9999;
@@ -92,6 +92,28 @@ textarea.messagebox, #cke_Content, #cke_UpdateContent {
     border-bottom: 1px solid #600;
 }
 
+#ticket_timer .start img {
+    cursor: pointer;
+    height: 1.5em;
+    width: auto;
+}
+
+#ticket_timer .playpause img {
+    cursor: pointer;
+    height: 1em;
+    width: auto;
+}
+
 #ticket_timer .readout {
+    display: none;
     font-size: 1.5em;
+}
+
+#ticket_timer .playpause {
+    display: none;
+}
+
+#ticket_timer .ticket {
+    display: none;
+    color: #999;
 }

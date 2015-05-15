@@ -46,5 +46,18 @@
 %#
 %# END BPS TAGGED BLOCK }}}
 <div id="ticket_timer">
+    <span class="start">
+        <img src="<% RT->Config->Get('WebPath') %>/static/images/stopwatch.png" alt="<% loc('Start Timer') %>" />
+    </span>
+
+    <span class="playpause">
+        <span class="pause"><img src="<% RT->Config->Get('WebPath') %>/static/images/pause.png" alt="<% loc('Pause Timer') %>" /></span>
+        <span class="unpause"><img src="<% RT->Config->Get('WebPath') %>/static/images/unpause.png" alt="<% loc('Unpause Timer') %>" /></span>
+    </span>
+
     <span class="readout">0:00:00</span>
+
+    <span class="ticket">
+        <a href="<% RT->Config->Get('WebPath') %>/Ticket/Display.html?id=1">#1</a>
+    </span>
 </div>
