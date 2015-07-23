@@ -1,8 +1,7 @@
 use strict;
 use warnings;
 
-use lib 'xt/lib';
-use RT::Extension::Assets::Test tests => undef;
+use RT::Test::Assets tests => undef;
 
 my $user = RT::Test->load_or_create_user( Name => 'testuser' );
 ok $user->id, "Created user";

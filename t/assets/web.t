@@ -1,8 +1,7 @@
 use strict;
 use warnings;
 
-use lib 'xt/lib';
-use RT::Extension::Assets::Test tests => undef;
+use RT::Test::Assets tests => undef;
 
 RT->Config->Set("CustomFieldGroupings",
     "RT::Asset" => {
@@ -28,7 +27,7 @@ my %CF = (
     Purchased   => ".CF-" . $purchased->id . "-Edit",
 );
 
-my ($base, $m) = RT::Extension::Assets::Test->started_ok;
+my ($base, $m) = RT::Test::Assets->started_ok;
 ok $m->login, "Logged in agent";
 
 diag "Create basic asset (no CFs)";

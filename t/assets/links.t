@@ -1,8 +1,7 @@
 use strict;
 use warnings;
 
-use lib 'xt/lib';
-use RT::Extension::Assets::Test tests => undef;
+use RT::Test::Assets tests => undef;
 use Test::Warn;
 
 my $catalog = create_catalog( Name => "BPS" );

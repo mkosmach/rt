@@ -1,8 +1,7 @@
 use strict;
 use warnings;
 
-use lib 'xt/lib';
-use RT::Extension::Assets::Test tests => undef;
+use RT::Test::Assets tests => undef;
 
 my $catalog = create_catalog( Name => "A catalog" );
 my $asset = create_asset( Name => "Test asset", Catalog => $catalog->id );
