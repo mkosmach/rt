@@ -1,10 +1,7 @@
 use strict;
 use warnings;
 
-### after: use lib qw(@RT_LIB_PATH@);
-use lib qw(/Users/trwww/Documents/waveright/bestpractical/git/rt/local/lib ../rt/lib);
-
-package RT::Extension::Assets::Test;
+package RT::Test::Assets;
 use base 'RT::Test';
 
 our @EXPORT = qw(create_catalog create_asset create_assets create_cf apply_cfs);
@@ -12,13 +9,6 @@ our @EXPORT = qw(create_catalog create_asset create_assets create_cf apply_cfs);
 sub import {
     my $class = shift;
     my %args  = @_;
-
-    $args{'requires'} ||= [];
-    if ( $args{'testing'} ) {
-        unshift @{ $args{'requires'} }, 'RT::Extension::Assets';
-    } else {
-        $args{'testing'} = 'RT::Extension::Assets';
-    }
 
     $class->SUPER::import( %args );
 
