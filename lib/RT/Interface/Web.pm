@@ -127,6 +127,7 @@ sub JSFiles {
       forms.js
       event-registration.js
       late.js
+      assets.js
       /static/RichText/ckeditor.js
       }, RT->Config->Get('JSFiles');
 }
